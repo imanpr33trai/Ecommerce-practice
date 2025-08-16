@@ -8,6 +8,10 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  reviews       Review[]
+  cart          Cart[]
+  order         Order[]
+  wishList      Wish[]
 
   @@unique([email])
   @@map("user")
