@@ -54,17 +54,17 @@ export default function Header() {
         </div>
         <nav className="flex flex-row gap-3">
           <Button className="rounded-full bg-white w-8 h-8 flex items-center justify-center">
-            <Link href={"wishlists"}>
+            <Link href={"wishlist"}>
               <Heart className="text-black h-4 w-4" />
             </Link>
           </Button>
           <Button className="rounded-full bg-white w-8 h-8 flex items-center justify-center">
-            <Link href={"wishlists"}>
+            <Link href={"cart"}>
               <ShoppingCart className="text-black h-4 w-4" />
             </Link>
           </Button>
           <Button className="rounded-full bg-white w-8 h-8 flex items-center justify-center">
-            <Link href={"wishlists"}>
+            <Link href={"profile"}>
               <User className="text-black h-4 w-4" />
             </Link>
           </Button>

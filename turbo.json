@@ -32,7 +32,14 @@
 		"db:generate": {
 			"cache": false,
 			"persistent": true
-		}
+		},
+		"db:reset": {
+			"cache": false,
+			"persistent": true
+		},
+		"db:seed": {
+			"cache": false,
+			"persistent": true
 		
-			}
+			}}
 }

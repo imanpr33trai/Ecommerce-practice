@@ -2,6 +2,7 @@ import {
   protectedProcedure, publicProcedure,
   router,
 } from "../lib/trpc";
+import { productRouter } from "./product";
 import { todoRouter } from "./todo";
 
 export const appRouter = router({
@@ -15,5 +16,6 @@ export const appRouter = router({
     };
   }),
   todo: todoRouter,
+  product: productRouter
 });
 export type AppRouter = typeof appRouter;

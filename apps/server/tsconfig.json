@@ -10,7 +10,9 @@
     "paths": {
       "@/*": ["./src/*"]
       ,
-      "prisma": ["node_modules/prisma"]
+      "prisma": ["prisma"]
+      ,
+      "@generated/*": ["./prisma/@generated/*"]
     },
     "outDir": "./dist",
     "types": [

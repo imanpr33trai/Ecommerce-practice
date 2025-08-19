@@ -2,7 +2,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { mockProducts } from "@/lib/mock-data";
+import { mockProducts, type Product } from "@/lib/mock-data";
 import {
   IconHeart,
   IconShoppingBag,
@@ -31,21 +31,21 @@ const ProductPage = () => {
     );
   }
 
-  const relatedProduct = mockProducts.find(
+  const relatedProduct = mockProducts.filter(
     (p) => p.category === product.category && p.id !== product.id
   );
 
   return (
-    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-2 sm:p-4 lg:p-6">
-      <div className="max-w-7xl mx-auto">
-        <main className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-6">
+    <div className="min-h-screen max-w-7xl bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-2 sm:p-4 lg:p-6 mx-auto">
+      <div className=" ">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-6">
           {/* Main Product Display */}
           <div className="lg:col-span-3">
             <ProductDisplayCard product={product} />
           </div>
 
           {/* Sidebar with Details and Actions */}
-          <div className="lg:col-span-2 flex flex-col space-y-6">
+          <div className="lg:col-span-2 flex  flex-col space-y-6">
             <ProductDetailsCard product={product} />
             <div className="grid grid-cols-2 gap-6">
               <ColorOptionsCard />
@@ -62,24 +62,34 @@ const ProductPage = () => {
           </div>
 
           {/* Related Products and Team/Bonus Cards */}
-          <div className="lg:col-span-5 grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div className="lg:col-span-3">
-              {relatedProduct && (
-                <RelatedProductCard product={relatedProduct} />
+          <div className="lg:col-span-5 grid grid-cols-1  lg:grid-cols-4 gap-6">
+            <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {relatedProduct.length > 0 ? (
+                relatedProduct.map((p) => (
+                  <div className="lg:col-span-1 " key={p.id}>
+                    <RelatedProductCard product={p} />
+                  </div>
+                ))
+              ) : (
+                <p>No related products found.</p>
               )}
             </div>
-            <div className="lg:col-span-1 space-y-6">
+            <div className="lg:col-span-1 grid grid-cols-1 lg:grid-cols-1 gap-6 ">
               <TeamCard />
               <BonusCard />
             </div>
           </div>
-        </main>
+          <div className="lg:col-span-5 grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <ReviewCard product={product} />
+          </div></div>
+        </div>
       </div>
     </div>
   );
 };
 
-const ProductDisplayCard = ({ product }: { product: any }) => (
+const ProductDisplayCard = ({ product }: { product: Product }) => (
   <div className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg h-full flex flex-col">
     <h2 className="text-3xl font-bold text-zinc-400 dark:text-zinc-500">
       {product.category}
@@ -99,25 +109,25 @@ const ProductDisplayCard = ({ product }: { product: any }) => (
   </div>
 );
 
-const ProductDetailsCard = ({ product }: { product: any }) => (
-  <div className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg flex flex-col">
+const ProductDetailsCard = ({ product }: { product: Product }) => (
+  <div className="bg-white w-full h-full dark:bg-zinc-800 p-6 rounded-3xl shadow-lg flex flex-col">
     <h1 className="text-4xl font-bold">{product.name}</h1>
     <p className="text-2xl font-semibold mt-2">${product.price}</p>
     <p className="text-zinc-500 dark:text-zinc-400 mt-4 flex-grow">
       {product.description}
     </p>
 
-    <div className="mt-6 flex gap-2">
-      <Button className="flex-1" size="lg">
+    <div className="mt-6 flex gap-2 ">
+      <Button className="flex-1 w-full" size="lg">
         <IconShoppingBag />
         Add to Cart
       </Button>
-      <Button className="flex-1" variant="outline" size="lg">
+      <Button className="w-[20%] " variant="outline" size="lg">
         <IconHeart />
       </Button>
     </div>
 
-    <Button className="mt-3" variant="outline" size="lg">
+    <Button href="Buy-Now" className="mt-3" variant="outline" size="lg">
       Buy Now
     </Button>
   </div>
@@ -135,22 +145,31 @@ const ColorOptionsCard = () => (
   </div>
 );
 
-const SizeSelectorCard = () => (
-  <div className="bg-white dark:bg-zinc-800 p-4 rounded-3xl shadow-lg">
-    <h4 className="font-bold text-lg mb-2">Size</h4>
-    <div className="flex space-x-2">
-      <Button variant="outline" className="rounded-full">
-        S
-      </Button>
-      <Button variant="outline" className="rounded-full">
-        M
-      </Button>
-      <Button variant="outline" className="rounded-full">
-        L
-      </Button>
+const SizeSelectorCard = () => {
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const sizes = ["S", "M", "L"];
+  return (
+    <div className="bg-white dark:bg-zinc-800 p-4 rounded-3xl shadow-lg">
+      <h4 className="font-bold text-lg mb-2">Size</h4>
+      <div className="flex space-x-2">
+        {sizes.map((size) => (
+          <Button
+            key={size}
+            variant={"outline"}
+            className={`rounded-full ${
+              selectedSize === size
+                ? "dark:bg-white bg-black text-black dark:hover:bg-white/90 dark:hover:text-black"
+                : ""
+            } `}
+            onClick={() => setSelectedSize(size)}
+          >
+            {size}
+          </Button>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const QuantitySelectorCard = () => {
   const [quantity, setQuantity] = useState(1);
@@ -225,26 +244,28 @@ const CustomerReviewsCard = () => (
   </div>
 );
 
-const RelatedProductCard = ({ product }: { product: any }) => (
-  <Link href={`/${product.id}`} className="block h-full">
-    <div className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg cursor-pointer h-full flex flex-col">
-      <span className="text-xs font-semibold bg-zinc-200 dark:bg-zinc-700 px-2 py-1 rounded-full self-start">
-        RELATED
-      </span>
-      <h3 className="text-xl font-bold mt-4">{product.name}</h3>
-      <div className="mt-4 h-48 bg-zinc-200 dark:bg-zinc-700 rounded-2xl flex-grow">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover rounded-2xl"
-        />
-      </div>
+const RelatedProductCard = ({ product }: { product: Product }) => (
+  
+    <div className="block h-full">
+      <div className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg cursor-pointer h-full ">
+        <span className="text-xs font-semibold bg-zinc-200 dark:bg-zinc-700 px-2 py-1 rounded-full self-start">
+          RELATED
+        </span>
+        <h3 className="text-xl font-bold mt-4">{product.name}</h3>
+        <div className="mt-4 h-48 bg-zinc-200 dark:bg-zinc-700 rounded-2xl flex-grow">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover rounded-2xl"
+          />
+        </div>
+      
     </div>
-  </Link>
+  </div>
 );
 
 const TeamCard = () => (
-  <div className="bg-white dark:bg-zinc-800 p-4 rounded-3xl shadow-lg">
+  <div className="bg-white dark:bg-zinc-800 p-4 rounded-3xl block  shadow-lg">
     <h4 className="font-bold">OUR TEAM</h4>
     <p className="text-sm text-zinc-500 dark:text-zinc-400">
       Designers of luxurious minimalist furniture.
@@ -258,7 +279,7 @@ const TeamCard = () => (
 );
 
 const BonusCard = () => (
-  <div className="bg-white dark:bg-zinc-800 p-4 rounded-3xl shadow-lg">
+  <div className="bg-white dark:bg-zinc-800 block  p-4 rounded-3xl shadow-lg">
     <h4 className="font-bold">GET A BONUS</h4>
     <p className="text-sm text-zinc-500 dark:text-zinc-400">
       Discover our latest exclusive deals.
@@ -276,4 +297,31 @@ const BonusCard = () => (
   </div>
 );
 
+const ReviewCard = ({product}:{product:Product}) => (
+  <div className="lg:col-span-5 gap-6 flex flex-row">
+            
+              {product.review.map((review: string, index: number) => (
+                <div key={index} className="bg-white dark:bg-zinc-800 p-4 lg rounded-3xl shadow-lg mb-4">
+                  <div>
+                    {product.user?.map((u,idx)=>(
+                      <div key={idx} className="flex items-center space-x-2 mb-2 ">
+                        <div className="bg-zinc-200 dark:bg-zinc-700 rounded-2xl">
+                        <img
+                          src={u.image}
+                          alt={u.name}
+                          className="w-8 h-8 rounded-full"
+                        /></div>
+                        <span className="font-semibold">{u.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-zinc-600 dark:text-zinc-400">{review}</p>
+                </div>
+              ))}
+            
+          </div>
+)
 export default ProductPage;
+function setPressed(arg0: boolean): void {
+  throw new Error("Function not implemented.");
+}

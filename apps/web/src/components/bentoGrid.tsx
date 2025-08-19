@@ -1,16 +1,39 @@
 /* eslint-disable @next/next/no-img-element */
+"use client"
 import {
   IconAdjustmentsHorizontal,
-  IconAppWindow,
-  IconHeart,
-  IconSearch,
-  IconShoppingBag,
+
 } from "@tabler/icons-react";
 import { Button } from "./ui/button";
 import { mockProducts } from "@/lib/mock-data";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { trpc } from "@/utils/trpc";
+import { Loader2 } from "lucide-react";
+import type { Product} from '../../../../types'
 
 const BentoGrid = () => {
+
+      const {data:product,isLoading,isError,error} = useQuery(trpc.product.getAll.queryOptions());
+  
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader2 className="animate-spin w-8 h-8 text-zinc-500" />
+      </div>
+    );
+  }
+  if (isError || error) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-red-500">Error loading products</p>
+      </div>
+    );
+  }
+
+  const productDeal = product.filter((p)=>p.createdAt)
+
+  
   const newDeal = mockProducts.find((p) => p.deal === "New");
   const greatValueDeal = mockProducts.find((p) => p.deal === "Great Value");
   const exclusiveProduct = mockProducts.find((p) => p.exclusive);
@@ -21,18 +44,19 @@ const BentoGrid = () => {
         <Filters />
         <main className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-6">
           <div className="lg:col-span-2 flex flex-col h-full space-y-6">
-            {newDeal && <NewDealsCard product={newDeal} />}
+            {newDeal && <NewDealsCard product={productDeal} />}
           </div>
           <div className="lg:col-span-2 flex flex-col space-y-6">
             {greatValueDeal && <GreatValueDealsCard product={greatValueDeal} />}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {exclusiveProduct && <ExclusiveCard product={exclusiveProduct} />}
-              <div className="space-y-6">
+              <div className="space-y-6 grid">
                 <TeamCard />
                 <BonusCard />
               </div>
             </div>
           </div>
+        
         </main>
       </div>
     </div>
@@ -61,25 +85,25 @@ const Filters = () => {
   );
 };
 
-const NewDealsCard = ({ product }: { product: any }) => (
+const NewDealsCard = ({ product }: { product:Product }) => (
   <div className="h-full">
     <div className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg h-full flex flex-col cursor-pointer">
       <h2 className="text-3xl font-bold text-zinc-400 dark:text-zinc-500">
         New Deals
       </h2>
       <div className="flex-grow flex flex-col justify-center items-center mt-4">
-        <div className="relative w-full">
+        <div className="relative w-full h-full">
           <img
-            src={product.image}
-            alt={product.name}
-            className="bg-zinc-200 dark:bg-zinc-700 h-64 w-full rounded-2xl object-cover"
+            src={product.images.}
+            alt=
+            className="bg-zinc-200 dark:bg-zinc-700 h-full w-full rounded-2xl object-cover"
           />
           <div className="absolute bottom-4 left-4 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-lg p-4 rounded-2xl">
             <p className="text-2xl font-bold">${product.price}</p>
             <p className="text-zinc-600 dark:text-zinc-400">{product.name}</p>
           </div>
           <div className="absolute top-4 right-4 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-lg p-2 rounded-full">
-            <span className="text-yellow-500">⭐</span> {product.rating}
+            <span className="text-yellow-500">⭐</span> {product.}
           </div>
         </div>
       </div>
@@ -174,5 +198,6 @@ const BonusCard = () => (
     </div>
   </div>
 );
+
 
 export default BentoGrid;
