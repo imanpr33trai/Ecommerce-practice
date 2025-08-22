@@ -27,7 +27,7 @@ const CartItemCard = ({ item }: { item: CartItem }) => {
   };
   
   const handleRemove = () => {
-    removeItem({ id:item.productId });
+    removeItem({ productId:item.productId });
   };
 
   const isMutating = isRemoving || isUpdating;
@@ -108,11 +108,21 @@ const OrderSummaryCard = ({ items }: { items: CartItem[] }) => {
 // =================================================================================
 // Section 3: Main View for When Cart Has Items (Arrow Function Component)
 // =================================================================================
-const CartView = ({ cart }: { cart: UserCart }) => (
+const CartView = ({ cart }: { cart: UserCart | null }) => {
+  if(!cart){
+    return (
+      <div className='flex items-center justify-center h-40'>
+        <span>Your cart is empty.</span>
+      </div>
+    )
+  }
+  
+  
+  return(
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <Card className="rounded-xl shadow-lg lg:col-span-2">
             <CardHeader>
-                <CardTitle>Shopping Cart ({cart.items ?? 0} items)</CardTitle>
+                <CardTitle>Shopping Cart ({cart.items.length ?? 0} items )</CardTitle>
             </CardHeader>
             <CardContent>
                 {cart?.items.map((item, index) => (
@@ -128,6 +138,7 @@ const CartView = ({ cart }: { cart: UserCart }) => (
         </div>
     </div>
 );
+}
 
 // =================================================================================
 // Section 4: Loading & Empty States (Arrow Function Components)
@@ -169,7 +180,7 @@ export default function CartPage() {
       {isError && <p className="text-center text-red-500">Could not load your cart.</p>}
 
       {!isLoading && !isError && (
-        cart && cart..length > 0 ? <CartView cart={cart} /> : <CartEmptyState />
+        cart && cart.items.length > 0 ? <CartView cart={cart} /> : <CartEmptyState />
       )}
     </div>
   );

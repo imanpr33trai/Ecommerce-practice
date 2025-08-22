@@ -20,17 +20,18 @@ import { useCart } from '@/hooks/useCart';
 // =================================================================================
 const WishlistItemCard = ({ item }: { item:WishItem }) => {
   
-  // const {data:allWish} = useWish.getAll()
+  
   
   const {mutate:removeProduct, isPending:isRemoving} = useWish.removeWish()
   const {mutate:addToCart, isPending:isAddingToCart} = useCart.addToCart()
+
 
   const handleRemove = () => {
     removeProduct({ id: item.id});
   };
   
   const handleAddToCart = () => {
-    addToCart({ productId:item.product.id, quantity:1, userId:item.userId});
+    addToCart({ productId:item.product.id, quantity:1});
   };
 
   return (
@@ -127,7 +128,8 @@ const WishlistEmptyState = () => (
 // =================================================================================
 export default function WishlistPage() {
   // TODO: Replace with your actual tRPC query
-  const { data: wishlistItems, isLoading, isError } = useWish.getAll();
+  const {data:wishlistItems, isLoading,isError} = useWish.getAll()
+  // const { data: wishlistItems, isLoading, isError } = useWish.getAll();
 
   const hasItems = wishlistItems && wishlistItems.length > 0;
 

@@ -4,28 +4,42 @@ import { toast } from "sonner";
 
 export const useCart = {
     addToCart: () => {
-        return useMutation(trpc.cart.addToCart.mutationOptions())
-    },
-    removeItem: () => useMutation(
-        trpc.cart.removeFromCart.mutationOptions({
+        return useMutation(trpc.cart.addToCart.mutationOptions({
             onSuccess: (data, variables) => {
 
-                toast.success(`Removed from cart.`);
+                toast.success(`Added To Cart. `);
+
             },
             onError: (error) => toast.error(error.message),
-        })
-    ),
+        }))
+    },
+    removeItem: () => {
+        const { refetch } = useQuery(trpc.cart.getAll.queryOptions());
+        return useMutation(
+            trpc.cart.removeFromCart.mutationOptions({
+                onSuccess: (data, variables) => {
+                    refetch();
+                    toast.success(`Removed from cart.`);
+                },
+                onError: (error) => toast.error(error.message),
+            })
+        )
+    },
     getAll: () => {
         return useQuery(trpc.cart.getAll.queryOptions())
     },
-    updateQuantity: () => useMutation(
-        trpc.cart.updateQuantity.mutationOptions({ // Assumes you have this procedure
-            onSuccess: (data, variables) => {
-                toast.success(`Updated quantity for ${variables.productId}.`);
-            },
-            onError: (error) => toast.error(error.message),
-        })
-    )
+    updateQuantity: () => {
+        const { refetch } = useQuery(trpc.cart.getAll.queryOptions());
+        return useMutation(
+            trpc.cart.updateQuantity.mutationOptions({
+                onSuccess: (data, variables) => {
+                    refetch();
+                    toast.success(`Updated quantity for ${variables.productId}.`);
+                },
+                onError: (error) => toast.error(error.message),
+            })
+        );
+    }
 
 
 }

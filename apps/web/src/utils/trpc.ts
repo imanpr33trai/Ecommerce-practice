@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import superjson from 'superjson';
 import { type inferRouterOutputs } from '@trpc/server';
 
+export const api = createTRPCReact<AppRouter>;
 
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
 
@@ -44,4 +45,8 @@ export const trpc = createTRPCOptionsProxy<AppRouter>({
   client: trpcClient,
   queryClient,
 });
+
+function createTRPCReact<T>() {
+  throw new Error('Function not implemented.');
+}
 
