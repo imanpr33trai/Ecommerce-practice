@@ -2,8 +2,10 @@ import {
   protectedProcedure, publicProcedure,
   router,
 } from "../lib/trpc";
+import { cartRouter } from "./cart";
 import { productRouter } from "./product";
 import { todoRouter } from "./todo";
+import { wishRouter } from "./wish";
 
 export const appRouter = router({
   healthCheck: publicProcedure.query(() => {
@@ -16,6 +18,8 @@ export const appRouter = router({
     };
   }),
   todo: todoRouter,
-  product: productRouter
+  product: productRouter,
+  wish: wishRouter,
+  cart: cartRouter
 });
 export type AppRouter = typeof appRouter;

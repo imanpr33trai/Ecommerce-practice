@@ -10,7 +10,7 @@
     "baseUrl": ".",               // important
     "paths": {
       "@generated/*": ["apps/server/prisma/generated/*"]
-    }
+    }    
   },
   
 }

@@ -1,6 +1,13 @@
 import "dotenv/config";
 import path from "node:path";
-import type { PrismaConfig } from "prisma";
+
+// Define the PrismaConfig interface
+interface PrismaConfig {
+  schema: string;
+  migrations: {
+    path: string;
+  };
+}
 
 export default {
   schema: path.join("prisma", "schema"),

@@ -1,20 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
+import { useProduct } from "@/hooks/useProduct";
+import { mockProducts } from "@/lib/mock-data";
+import type { DealProduct, ExclusiveProduct } from "@/utils/types";
 import {
   IconAdjustmentsHorizontal,
-
 } from "@tabler/icons-react";
-import { Button } from "./ui/button";
-import { mockProducts } from "@/lib/mock-data";
-import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
-import { trpc } from "@/utils/trpc";
 import { Loader2 } from "lucide-react";
-import type { Product} from '../../../../types'
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "./ui/button";
+
 
 const BentoGrid = () => {
-
-      const {data:product,isLoading,isError,error} = useQuery(trpc.product.getAll.queryOptions());
+    const {data:newDeal,isLoading,isError} = useProduct.newDeals();
+    const {data:exclusiveProduct} = useProduct.exclusiveDeals();
   
   if (isLoading) {
     return (
@@ -23,20 +23,19 @@ const BentoGrid = () => {
       </div>
     );
   }
-  if (isError || error) {
+  if (isError) {
     return (
       <div className="flex items-center justify-center h-screen">
         <p className="text-red-500">Error loading products</p>
       </div>
     );
   }
-
-  const productDeal = product.filter((p)=>p.createdAt)
+  // const productDeal = product.filter((p)=>p.createdAt)
 
   
-  const newDeal = mockProducts.find((p) => p.deal === "New");
+  // const newDeal = mockProducts.find((p) => p.deal === "New");
   const greatValueDeal = mockProducts.find((p) => p.deal === "Great Value");
-  const exclusiveProduct = mockProducts.find((p) => p.exclusive);
+  // const exclusiveProduct = mockProducts.find((p) => p.exclusive);
 
   return (
     <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-2 sm:p-4 lg:p-6">
@@ -44,7 +43,7 @@ const BentoGrid = () => {
         <Filters />
         <main className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-6">
           <div className="lg:col-span-2 flex flex-col h-full space-y-6">
-            {newDeal && <NewDealsCard product={productDeal} />}
+            {newDeal && <NewDealsCard product={newDeal} />}
           </div>
           <div className="lg:col-span-2 flex flex-col space-y-6">
             {greatValueDeal && <GreatValueDealsCard product={greatValueDeal} />}
@@ -85,7 +84,15 @@ const Filters = () => {
   );
 };
 
-const NewDealsCard = ({ product }: { product:Product }) => (
+const NewDealsCard = ({ product }: { product:DealProduct }) => {
+  if (product === null || product === undefined) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader2 className="animate-spin w-8 h-8 text-zinc-500" />
+      </div>
+    );
+  }
+return(
   <div className="h-full">
     <div className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg h-full flex flex-col cursor-pointer">
       <h2 className="text-3xl font-bold text-zinc-400 dark:text-zinc-500">
@@ -93,17 +100,27 @@ const NewDealsCard = ({ product }: { product:Product }) => (
       </h2>
       <div className="flex-grow flex flex-col justify-center items-center mt-4">
         <div className="relative w-full h-full">
-          <img
-            src={product.images.}
-            alt=
-            className="bg-zinc-200 dark:bg-zinc-700 h-full w-full rounded-2xl object-cover"
-          />
+          <picture>
+            
+            {product.images.slice(0, 1).map((img, index) => (
+  <Image
+    key={index}
+    width={500}
+    height={500}
+    src={img.url}
+    alt={img.altText || "Product Image"}
+    className="bg-zinc-200 dark:bg-zinc-700 h-full w-full rounded-2xl object-cover"
+  />
+))}
+
+          </picture>
           <div className="absolute bottom-4 left-4 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-lg p-4 rounded-2xl">
-            <p className="text-2xl font-bold">${product.price}</p>
+            <p className="text-2xl font-bold">{Number(product.price)}
+</p>
             <p className="text-zinc-600 dark:text-zinc-400">{product.name}</p>
           </div>
           <div className="absolute top-4 right-4 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-lg p-2 rounded-full">
-            <span className="text-yellow-500">⭐</span> {product.}
+            <span className="text-yellow-500">⭐</span> {product.reviews.map((r)=> r.rating).reduce((a, b) => a + b, 0) / product.reviews.length}
           </div>
         </div>
       </div>
@@ -117,8 +134,8 @@ const NewDealsCard = ({ product }: { product:Product }) => (
         </button>
       </div>
     </div>
-  </div>
-);
+  </div>)
+};
 
 const GreatValueDealsCard = ({ product }: { product: any }) => (
   <Link href={`/${product.id}`}>
@@ -145,7 +162,15 @@ const GreatValueDealsCard = ({ product }: { product: any }) => (
   </Link>
 );
 
-const ExclusiveCard = ({ product }: { product: any }) => (
+const ExclusiveCard = ({ product }: { product: ExclusiveProduct }) => {
+  if (product === null || product === undefined) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader2 className="animate-spin w-8 h-8 text-zinc-500" />
+      </div>
+    );
+  }
+return(
   <Link href={`/${product.id}`}>
     <div className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg cursor-pointer">
       <span className="text-xs font-semibold bg-zinc-200 dark:bg-zinc-700 px-2 py-1 rounded-full">
@@ -156,15 +181,25 @@ const ExclusiveCard = ({ product }: { product: any }) => (
         {product.description}
       </p>
       <div className="mt-4 h-40 bg-zinc-200 dark:bg-zinc-700 rounded-2xl">
-        <img
+        {product.images.slice(0, 1).map((img, index) => (
+  <Image
+    key={index}
+    width={500}
+    height={500}
+    src={img.url}
+    alt={img.altText || "Product Image"}
+    className="w-full h-full object-cover rounded-2xl"
+  />
+))}
+        {/* <img
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover rounded-2xl"
-        />
+        /> */}
       </div>
     </div>
   </Link>
-);
+)}
 
 const TeamCard = () => (
   <div className="bg-white dark:bg-zinc-800 p-4 rounded-3xl shadow-lg">

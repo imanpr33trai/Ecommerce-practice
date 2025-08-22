@@ -1,28 +1,58 @@
 import { publicProcedure, router } from "@/lib/trpc";
 import prisma from "../../prisma";
 export const productRouter = router({
-    getAll: publicProcedure.query(async () => {
-        return await prisma.product.findMany({
-            orderBy: {
-                createdAt: "desc"
+    getNewDeal: publicProcedure.query(async () => {
+        return await prisma.product.findFirst({
+            where: {
+                tags: {
+                    has: "newDeal"
+                }
             },
             include: {
                 reviews: {
                     select: {
                         rating: true,
-                        comment: true,
-                        user: {
-                            select: {
-                                name: true,
-                                image: true
-                            }
-                        }
+                    }
+                },
+
+                category: {
+                    select: {
+                        name: true
                     }
                 },
                 images: {
                     select: {
-                        url: true,
                         altText: true,
+                        url: true
+
+                    }
+                }
+            }
+        })
+    }),
+    getExclusiveDeal: publicProcedure.query(async () => {
+        return await prisma.product.findFirst({
+            where:
+            {
+                tags: { has: "exclusive" }
+            },
+            include: {
+                reviews: {
+                    select: {
+                        rating: true,
+                    }
+                },
+
+                category: {
+                    select: {
+                        name: true
+                    }
+                },
+                images: {
+                    select: {
+                        altText: true,
+                        url: true
+
                     }
                 }
             }
