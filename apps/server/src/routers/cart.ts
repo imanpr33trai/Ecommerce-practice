@@ -50,7 +50,6 @@ export const cartRouter = router({
         const userId = 'user_4';
 
         // --- TEMPORARY DIAGNOSTIC LOGS ---
-        console.log(`[DEBUG] 1. Searching for cart for userId: ${userId}`);
         const cart = await prisma.cart.findFirst({
             where: { userId },
         });
@@ -65,22 +64,6 @@ export const cartRouter = router({
             }
             return empty
         }
-
-        console.log(`[DEBUG] 2. Found cart with ID: ${cart.id}`);
-
-        // Now, let's query the CartItem table DIRECTLY
-        console.log(`[DEBUG] 3. Searching for CartItems with cartId: ${cart.id}`);
-        const itemsInDb = await prisma.cartItem.findMany({
-            where: {
-                cartId: cart.id
-            }
-        });
-
-        console.log(`[DEBUG] 4. Found ${itemsInDb.length} items in the database for this cartId.`);
-        console.log('[DEBUG] 5. Raw items found:', itemsInDb);
-        // --- END OF DIAGNOSTIC LOGS ---
-
-        // Now run the original query
         const cartWithIncludes = await prisma.cart.findFirst({
             where: { userId },
             include: {
@@ -100,8 +83,6 @@ export const cartRouter = router({
                 }
             }
         });
-
-        console.log('[DEBUG] 6. Result from final query with includes:', JSON.stringify(cartWithIncludes, null, 2));
 
         return cartWithIncludes;
     }),

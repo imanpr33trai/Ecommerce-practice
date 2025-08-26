@@ -25,6 +25,10 @@ export type WishItem = NonNullable<RouterOutputs['wish']['getAll']>[number];
 export type UserCart = RouterOutputs['cart']['getAll'];
 
 // A single item within the cart's items array
-export type CartItem = UserCart['items'][number];
+export type CartItem = NonNullable<UserCart>['items'][number];
 // // Type for a single item within the user's cart
 // export type CartItem = NonNullable<RouterOutputs['cart']['getAll']>['items'][number]; 
+
+export type ProductDetailed = RouterOutputs['product']['getProductBySlug'];
+
+export type ReviewProduct = NonNullable<RouterOutputs['review']['productReview']>[number];

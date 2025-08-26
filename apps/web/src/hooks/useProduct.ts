@@ -1,5 +1,5 @@
 // 1. Import the standard `useQuery` hook from TanStack Query
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { trpc } from '@/utils/trpc'; // Your tRPC client setup
 
 /**
@@ -25,4 +25,27 @@ export const useProduct = {
     exclusiveDeals: () => {
         return useQuery(trpc.product.getExclusiveDeal.queryOptions());
     },
+    getAll: () => {
+        return useQuery(trpc.product.getAll.queryOptions())
+    },
+    getBySlug: (slug: string) => {
+        const queryOptions = useQuery(trpc.product.getProductBySlug.queryOptions({ slug }))
+        return queryOptions;
+    },
+    reviewsByProductId: (productId: string | undefined) => {
+        const queryOptions = trpc.review.productReview.queryOptions({
+            productId: productId ?? ''
+        });
+
+        return useQuery({
+            ...queryOptions,
+            enabled: !!productId,
+            retry: false,
+            staleTime: 0,
+        });
+    }
 };
+
+
+
+

@@ -27,6 +27,28 @@ const _productWithDetails = Prisma.validator<Prisma.ProductDefaultArgs>()({
 });
 export type ProductWithDetails = Prisma.ProductGetPayload<typeof _productWithDetails>;
 
+const _productWithRelations = Prisma.validator<Prisma.ProductDefaultArgs>()({
+    include: {
+        images: true,
+        category: true,
+        reviews: {
+            orderBy: {
+                createdAt: 'desc', // Show newest reviews first
+            },
+            include: {
+                user: { // Include the author of the review
+                    select: {
+                        id: true,
+                        name: true,
+                        image: true,
+                    },
+                },
+            },
+        },
+    },
+});
+
+export type ProductWithRelations = Prisma.ProductGetPayload<typeof _productWithRelations>;
 
 // ------------------------------ Category ------------------------------
 

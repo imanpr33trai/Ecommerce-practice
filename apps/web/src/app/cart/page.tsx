@@ -12,7 +12,7 @@ import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { type UserCart, type CartItem } from '@/utils/types';
 import { useCart } from '@/hooks/useCart';
-import { trpc } from '@/utils/trpc';
+
 
 // =================================================================================
 // Section 1: Individual Cart Item Card (Arrow Function Component)

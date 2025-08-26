@@ -6,7 +6,7 @@ interface MaxWidthWrapperProps {
   children: ReactNode;
 }
 
-export const MaxWidthWrapper = ({
+const MaxWidthWrapper = ({
   className,
   children,
 }: MaxWidthWrapperProps) => {
@@ -21,3 +21,5 @@ export const MaxWidthWrapper = ({
     </div>
   );
 };
+export default MaxWidthWrapper;
+
