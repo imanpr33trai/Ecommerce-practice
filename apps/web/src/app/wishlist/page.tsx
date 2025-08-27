@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
-import {type WishItem  } from '@/utils/types';
+import { type WishItem } from '@/utils/types';
 import { trpc } from '@/utils/trpc';
 import { useWish } from '@/hooks/useWish';
 import { useCart } from '@/hooks/useCart';
@@ -18,20 +18,20 @@ import { useCart } from '@/hooks/useCart';
 // =================================================================================
 // Section 1: Individual Wishlist Item Card (Arrow Function Component)
 // =================================================================================
-const WishlistItemCard = ({ item }: { item:WishItem }) => {
-  
-  
-  
-  const {mutate:removeProduct, isPending:isRemoving} = useWish.removeWish()
-  const {mutate:addToCart, isPending:isAddingToCart} = useCart.addToCart()
+const WishlistItemCard = ({ item }: { item: WishItem }) => {
+
+
+
+  const { mutate: removeProduct, isPending: isRemoving } = useWish.removeWish()
+  const { mutate: addToCart, isPending: isAddingToCart } = useCart.addToCart()
 
 
   const handleRemove = () => {
-    removeProduct({ id: item.id});
+    removeProduct({ id: item.id });
   };
-  
+
   const handleAddToCart = () => {
-    addToCart({ productId:item.product.id, quantity:1});
+    addToCart({ productId: item.product.id, quantity: 1 });
   };
 
   return (
@@ -89,18 +89,18 @@ const WishlistGrid = ({ items }: { items: WishItem[] }) => (
 // Section 3: Loading State with Skeletons (Arrow Function Component)
 // =================================================================================
 const WishlistLoadingState = () => (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <Card key={i} className="rounded-xl">
-           <Skeleton className="aspect-[4/3] w-full" />
-           <div className="p-4 space-y-2">
-                <Skeleton className="h-6 w-3/4" />
-                <Skeleton className="h-5 w-1/4" />
-                <Skeleton className="h-10 w-full mt-2" />
-           </div>
-        </Card>
-      ))}
-    </div>
+  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    {Array.from({ length: 4 }).map((_, i) => (
+      <Card key={i} className="rounded-xl">
+        <Skeleton className="aspect-[4/3] w-full" />
+        <div className="p-4 space-y-2">
+          <Skeleton className="h-6 w-3/4" />
+          <Skeleton className="h-5 w-1/4" />
+          <Skeleton className="h-10 w-full mt-2" />
+        </div>
+      </Card>
+    ))}
+  </div>
 );
 
 
@@ -110,7 +110,7 @@ const WishlistLoadingState = () => (
 const WishlistEmptyState = () => (
   <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 p-12 text-center">
     <div className="mb-4 rounded-full bg-gray-100 dark:bg-gray-800 p-4">
-        <SearchX className="h-12 w-12 text-gray-500" />
+      <SearchX className="h-12 w-12 text-gray-500" />
     </div>
     <h2 className="text-2xl font-bold">Your Wishlist is Empty</h2>
     <p className="mt-2 text-gray-600 dark:text-gray-400">
@@ -128,7 +128,7 @@ const WishlistEmptyState = () => (
 // =================================================================================
 export default function WishlistPage() {
   // TODO: Replace with your actual tRPC query
-  const {data:wishlistItems, isLoading,isError} = useWish.getAll()
+  const { data: wishlistItems, isLoading, isError } = useWish.getAll()
   // const { data: wishlistItems, isLoading, isError } = useWish.getAll();
 
   const hasItems = wishlistItems && wishlistItems.length > 0;

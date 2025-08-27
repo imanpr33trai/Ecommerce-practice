@@ -1,0 +1,44 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "../../index.css";
+import Providers from "@/components/providers";
+import Header from "@/components/header";
+
+const geistSans = Geist({
+    variable: "--font-geist-sans",
+    subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+    variable: "--font-geist-mono",
+    subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+    title: "Ecommerce Platform",
+    description: "Ecommerce Platform",
+};
+
+export default function RootLayout({
+    children,
+    modal
+}: Readonly<{
+    children: React.ReactNode;
+    modal: React.ReactNode;
+}>) {
+    return (
+        <html lang="en" suppressHydrationWarning>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+                <Providers>
+                    <div className="grid grid-rows-[auto_1fr] h-svh">
+                        <Header />
+                        {children}
+                        {modal}
+                    </div>
+                </Providers>
+            </body>
+        </html>
+    );
+}
