@@ -1,19 +1,19 @@
-import { cn } from "@/lib/utils";
-import { type ReactNode } from "react";
+// src/components/max-width-wrapper.tsx
+import { cn } from '@/lib/utils';
+import type { ReactNode } from 'react';
 
-interface MaxWidthWrapperProps {
-  className?: string;
-  children: ReactNode;
-}
 
 const MaxWidthWrapper = ({
   className,
   children,
-}: MaxWidthWrapperProps) => {
+}: {
+  className?: string;
+  children: ReactNode;
+}) => {
   return (
     <div
       className={cn(
-        "h-full mx-auto w-full px-[72px]  overflow-x-hidden",
+        'mx-auto w-full max-w-screen-xl px-2.5 md:px-20',
         className
       )}
     >
@@ -21,5 +21,5 @@ const MaxWidthWrapper = ({
     </div>
   );
 };
-export default MaxWidthWrapper;
 
+export default MaxWidthWrapper;

@@ -25,6 +25,9 @@ export const useProduct = {
     exclusiveDeals: () => {
         return useQuery(trpc.product.getExclusiveDeal.queryOptions());
     },
+    greatValueDeals: () => {
+        return useQuery(trpc.product.getGreatValueDeal.queryOptions());
+    },
     getAll: () => {
         return useQuery(trpc.product.getAll.queryOptions())
     },
@@ -42,6 +45,17 @@ export const useProduct = {
             enabled: !!productId,
             retry: false,
             staleTime: 0,
+        });
+    },
+    byCategory: (slug: string[] | undefined) => {
+        const slugPath = slug?.join('/') ?? '';
+        const queryOptions = trpc.product.getByCategorySlug.queryOptions({
+            slug: slug!
+        });
+        return useQuery({
+            ...queryOptions,
+            enabled: !!slug,
+
         });
     }
 };

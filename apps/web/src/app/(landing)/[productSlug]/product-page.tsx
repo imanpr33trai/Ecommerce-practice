@@ -3,7 +3,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useProduct } from "@/hooks/useProduct";
-import type { ProductDetailed, ReviewProduct } from "@/utils/types";
+import type { ProductDetailed, ReviewAddResult, ProductListItem, ProductReview } from "@/utils/types";
 import {
   IconHeart,
   IconMessageCircle,
@@ -20,6 +20,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import Header from "@/components/header";
 
 const ProductPage = ({ productSlug }: { productSlug: string }) => {
   const { data: product, isLoading } = useProduct.getBySlug(productSlug);
@@ -123,6 +124,7 @@ const ProductPage = ({ productSlug }: { productSlug: string }) => {
   }
   return (
     <div className="min-h-screen max-w-7xl bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-2 sm:p-4 lg:p-6 mx-auto">
+      <Header />
       <div className=" ">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 ">
           {/* Main Product Display */}
@@ -328,7 +330,7 @@ const ShippingInfoCard = () => (
   </div>
 );
 
-const CustomerReviewsCard = ({ reviews }: { reviews: ReviewProduct[] }) => {
+const CustomerReviewsCard = ({ reviews }: { reviews: ProductReview[] }) => {
   const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
   return (
     <div className="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-lg">
@@ -512,7 +514,7 @@ const BonusCard = () => (
   </div>
 );
 
-const ReviewCard = ({ reviews }: { reviews: ReviewProduct[] }) => {
+const ReviewCard = ({ reviews }: { reviews: ProductReview[] }) => {
 
 
   return (

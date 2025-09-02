@@ -35,13 +35,27 @@ export const useWish = {
     ),
     getAll: () => {
         return useQuery(trpc.wish.getAll.queryOptions())
-    }
+    },
 
 
 
     // You could add another mutation for adding an item here
     // const addWish = useMutation({ ... });
+    addWish: () => {
+        return useMutation(trpc.wish.createWish.mutationOptions({
+            onSuccess: (data, variables) => {
+                toast.success("Added to Wishlist", {
+                    description: `${variables.productId} has been added to your wishlist.`
+                })
 
+            },
+            onError: (error) => {
+                toast.error("Error", {
+                    description: error.message
+                })
+            }
+        }))
+    }
 
 };
 
