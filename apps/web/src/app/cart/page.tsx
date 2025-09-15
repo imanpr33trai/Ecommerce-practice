@@ -6,10 +6,10 @@ import { useMemo } from 'react';
 import { ShoppingCart, Trash2, Plus, Minus } from 'lucide-react';
 
 // Import shadcn/ui and custom types/hooks
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/_components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/_components/ui/card';
+import { Separator } from '@/_components/ui/separator';
+import { Skeleton } from '@/_components/ui/skeleton';
 import { type UserCart, type CartItem } from '@/utils/types';
 import { useCart } from '@/hooks/useCart';
 
@@ -18,16 +18,16 @@ import { useCart } from '@/hooks/useCart';
 // Section 1: Individual Cart Item Card (Arrow Function Component)
 // =================================================================================
 const CartItemCard = ({ item }: { item: CartItem }) => {
-  const { mutate:removeItem,isPending:isRemoving  } = useCart.removeItem();
-  const {mutate:updateQuantity ,isPending:isUpdating} = useCart.updateQuantity()
+  const { mutate: removeItem, isPending: isRemoving } = useCart.removeItem();
+  const { mutate: updateQuantity, isPending: isUpdating } = useCart.updateQuantity()
 
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity < 1) return;
     updateQuantity({ productId: item.productId, quantity: newQuantity });
   };
-  
+
   const handleRemove = () => {
-    removeItem({ productId:item.productId });
+    removeItem({ productId: item.productId });
   };
 
   const isMutating = isRemoving || isUpdating;
@@ -98,7 +98,7 @@ const OrderSummaryCard = ({ items }: { items: CartItem[] }) => {
           <span>${total.toFixed(2)}</span>
         </div>
         <Button className="w-full" size="lg" asChild>
-            <Link href="/checkout">Proceed to Checkout</Link>
+          <Link href="/checkout">Proceed to Checkout</Link>
         </Button>
       </CardContent>
     </Card>
@@ -109,49 +109,49 @@ const OrderSummaryCard = ({ items }: { items: CartItem[] }) => {
 // Section 3: Main View for When Cart Has Items (Arrow Function Component)
 // =================================================================================
 const CartView = ({ cart }: { cart: UserCart | null }) => {
-  if(!cart){
+  if (!cart) {
     return (
       <div className='flex items-center justify-center h-40'>
         <span>Your cart is empty.</span>
       </div>
     )
   }
-  
-  
-  return(
+
+
+  return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        <Card className="rounded-xl shadow-lg lg:col-span-2">
-            <CardHeader>
-                <CardTitle>Shopping Cart ({cart.items.length ?? 0} items )</CardTitle>
-            </CardHeader>
-            <CardContent>
-                {cart?.items.map((item, index) => (
-                    <div key={item.id}>
-                        <CartItemCard item={item} />
-                        {index < cart.items.length - 1 && <Separator />}
-                    </div>
-                ))}
-            </CardContent>
-        </Card>
-        <div className="lg:col-span-1">
-            <OrderSummaryCard items={cart?.items ?? []} />
-        </div>
+      <Card className="rounded-xl shadow-lg lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Shopping Cart ({cart.items.length ?? 0} items )</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {cart?.items.map((item, index) => (
+            <div key={item.id}>
+              <CartItemCard item={item} />
+              {index < cart.items.length - 1 && <Separator />}
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+      <div className="lg:col-span-1">
+        <OrderSummaryCard items={cart?.items ?? []} />
+      </div>
     </div>
-);
+  );
 }
 
 // =================================================================================
-// Section 4: Loading & Empty States (Arrow Function Components)
+// Section 4: Loading & Empty States (Arrow Function _components)
 // =================================================================================
 const CartLoadingState = () => (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        <div className="lg:col-span-2 space-y-4">
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-24 w-full" />
-            <Skeleton className="h-24 w-full" />
-        </div>
-        <Skeleton className="h-64 w-full lg:col-span-1" />
+  <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <div className="lg:col-span-2 space-y-4">
+      <Skeleton className="h-16 w-full" />
+      <Skeleton className="h-24 w-full" />
+      <Skeleton className="h-24 w-full" />
     </div>
+    <Skeleton className="h-64 w-full lg:col-span-1" />
+  </div>
 );
 
 const CartEmptyState = () => (
@@ -174,7 +174,7 @@ export default function CartPage() {
   return (
     <div className="container mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <h1 className="text-4xl font-extrabold tracking-tight mb-8">Your Cart</h1>
-      
+
       {isLoading && <CartLoadingState />}
 
       {isError && <p className="text-center text-red-500">Could not load your cart.</p>}

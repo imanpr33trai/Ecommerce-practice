@@ -1,4 +1,6 @@
 import { Prisma } from '@generated/client'
+import type { ProductDefaultArgs } from '@generated/models';
+import { includes } from 'zod';
 
 /**
  * =================================================================================================
@@ -13,19 +15,36 @@ import { Prisma } from '@generated/client'
 // ------------------------------ Product ------------------------------
 
 /** Includes Product's images, category, and a count of its reviews. */
-const _productWithDetails = Prisma.validator<Prisma.ProductDefaultArgs>()({
+
+
+const _productDetailed = Prisma.validator<ProductDefaultArgs>()({
     include: {
         images: true,
         category: true,
-        reviews: true,
         _count: {
             select: {
-                reviews: true
+                reviews: true,
             }
-        }
-    },
-});
-export type ProductWithDetails = Prisma.ProductGetPayload<typeof _productWithDetails>;
+        },
+        reviews: {
+            orderBy: {
+                createdAt: 'desc'
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        image: true
+                    }
+                }
+            },
+
+        },
+    }
+})
+
+export type ProductDetailed = Prisma.ProductGetPayload<typeof _productDetailed>;
 
 const _productWithRelations = Prisma.validator<Prisma.ProductDefaultArgs>()({
     include: {
@@ -139,3 +158,37 @@ const _reviewWithUser = Prisma.validator<Prisma.ReviewDefaultArgs>()({
     },
 });
 export type ReviewWithUser = Prisma.ReviewGetPayload<typeof _reviewWithUser>;
+
+
+const _categoryWithChildren = Prisma.validator<Prisma.CategoryDefaultArgs>()({
+    include: {
+        children: {
+            select: {
+                id: true,
+                name: true,
+                slug: true,
+                _count: { select: { products: true } }
+            },
+            orderBy: { name: 'asc' }
+        },
+        _count: { select: { products: true } }
+    }
+});
+export type CategoryWithChildren = Prisma.CategoryGetPayload<typeof _categoryWithChildren>;
+
+const _simpleCategory = Prisma.validator<Prisma.CategoryDefaultArgs>()({
+    select: {
+        id: true,
+        name: true,
+        slug: true,
+        _count: { select: { products: true } }
+    }
+});
+
+export type SimpleCategory = Prisma.CategoryGetPayload<typeof _simpleCategory>;
+
+
+
+const _wishListItem = Prisma.validator<Prisma.WishDefaultArgs>()({
+    select: {}
+})

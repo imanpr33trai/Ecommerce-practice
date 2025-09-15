@@ -35,29 +35,25 @@ export const useProduct = {
         const queryOptions = useQuery(trpc.product.getProductBySlug.queryOptions({ slug }))
         return queryOptions;
     },
-    reviewsByProductId: (productId: string | undefined) => {
-        const queryOptions = trpc.review.productReview.queryOptions({
-            productId: productId ?? ''
-        });
+    /**
+ * Fetches a list of related products for a given product.
+ *
+ * @param params - Object containing `excludeProductId`, `categoryId`, `tags`, and `limit`.
+ */
+    getRelated: (params: {
+        categoryId?: string;
+        tags?: string[];
+        excludeProductId: string;
+        limit: number;
+    }) => {
+        const queryOptions = trpc.product.getRelatedProducts.queryOptions(params);
 
         return useQuery({
             ...queryOptions,
-            enabled: !!productId,
-            retry: false,
-            staleTime: 0,
-        });
-    },
-    byCategory: (slug: string[] | undefined) => {
-        const slugPath = slug?.join('/') ?? '';
-        const queryOptions = trpc.product.getByCategorySlug.queryOptions({
-            slug: slug!
-        });
-        return useQuery({
-            ...queryOptions,
-            enabled: !!slug,
-
-        });
+            enabled: !!params.excludeProductId,
+        })
     }
+
 };
 
 

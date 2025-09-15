@@ -55,51 +55,33 @@ export const useWish = {
                 })
             }
         }))
-    }
+    },
+    addOrRemove: () => {
+        return useMutation(trpc.wish.addOrRemove.mutationOptions({
+            onSuccess: (data, variables) => {
+                toast.success("added or Removed", { description: `${variables.productId} has been updated.` })
+            },
+            onError: (error) => {
+                toast.error("Error", { description: error.message })
+            }
+        }))
+    },
+
+    toggleWish: () => {
+        return useMutation(trpc.wish.toggle.mutationOptions({
+            onSuccess: (data, variables) => {
+                const { refetch } = useQuery(trpc.wish.getAll.queryOptions());
+                refetch()
+
+                const actionMessage = data.action === 'added' ? 'Added to Wishlist!' : 'Removed from Wishlist'
+                const description = `${variables.productName || 'Item'} has been ${data.action}.` // This line is already correct based on the last diff.
+                toast.success(actionMessage, { description });
+            },
+            onError: (error) => {
+                toast.error("Error", { description: error.message });
+            }
+        }))
+    },
+
 
 };
-
-// import { trpc } from "@/utils/trpc"
-// import { useMutation, useQuery } from "@tanstack/react-query"
-
-// export const useWish = {
-//     createWish: () => {
-//         return useMutation(trpc.wish.createWish.mutationOptions())
-//     },
-
-//     removeWish: () => {
-//         return useMutation(trpc.wish.removeWish.mutationOptions({
-//             onSuccess: () => {
-//                 console.log({ title: "Removed from Wishlist", description: `${item.product.name} has been removed.` });
-//                 // Invalidate the wishlist query to refetch and update the UI
-
-//             },
-//             onError: (error) => {
-//                 console.log({ title: "Error", description: error.message, variant: "destructive" });
-//             }
-//         }))
-//     },
-//     getAll: () => {
-//         return useQuery(trpc.wish.getAll.queryOptions())
-//     }
-// }
-
-
-// TODO: Replace with your actual tRPC mutations
-// const { mutate: removeItem, isLoading: isRemoving } = api.wishlist.remove.useMutation({
-//   onSuccess: () => {
-//     toast({ title: "Removed from Wishlist", description: `${item.product.name} has been removed.` });
-//     // Invalidate the wishlist query to refetch and update the UI
-//     utils.wishlist.get.invalidate();
-//   },
-//   onError: (error) => {
-//       toast({ title: "Error", description: error.message, variant: "destructive" });
-//   }
-// });
-
-// const { mutate: addToCart, isLoading: isAddingToCart } = api.cart.addItem.useMutation({
-//   onSuccess: () => {
-//       toast({ title: "Added to Cart!", description: `${item.product.name} is now in your cart.` });
-//       utils.cart.get.invalidate(); // Also update the cart count in the header
-//   }
-// });

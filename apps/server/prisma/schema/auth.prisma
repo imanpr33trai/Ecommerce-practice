@@ -12,6 +12,7 @@ model User {
   cart          Cart[]
   order         Order[]
   wishList      Wish[]
+  address       Address[]
 
   @@unique([email])
   @@map("user")

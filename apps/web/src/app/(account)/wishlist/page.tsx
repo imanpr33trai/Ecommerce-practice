@@ -6,12 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // Import shadcn/ui and custom types/hooks
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/_components/ui/button';
+import { Card, CardContent } from '@/_components/ui/card';
+import { Skeleton } from '@/_components/ui/skeleton';
 import { useCart } from '@/hooks/useCart';
 import { useWish } from '@/hooks/useWish';
 import { type WishlistItem } from '@/utils/types';
+import { toast } from 'sonner';
+import { IconHeartFilled } from '@tabler/icons-react';
 
 // =================================================================================
 // Section 1: Individual Wishlist Item Card (Arrow Function Component)
@@ -22,8 +24,15 @@ const WishlistItemCard = ({ item }: { item: WishlistItem }) => {
 
   const { mutate: removeProduct, isPending: isRemoving } = useWish.removeWish()
   const { mutate: addToCart, isPending: isAddingToCart } = useCart.addToCart()
+  const { mutate: addOrRemove } = useWish.addOrRemove()
 
-
+  const handleAddOrRemove = async () => {
+    try {
+      await addOrRemove({ productId: item.productId })
+    } catch (error) {
+      toast.error("Error WishList", { description: (error as Error).message })
+    }
+  }
   const handleRemove = () => {
     removeProduct({ id: item.id });
   };
@@ -60,11 +69,12 @@ const WishlistItemCard = ({ item }: { item: WishlistItem }) => {
           variant="destructive"
           size="icon"
           className="absolute top-3 right-3 h-8 w-8 rounded-full opacity-0 transition-opacity group-hover:opacity-100"
-          onClick={handleRemove}
+          onClick={handleAddOrRemove}
           disabled={isRemoving}
           aria-label="Remove from wishlist"
         >
-          <Heart className="h-4 w-4" />
+
+          <IconHeartFilled className="h-4 w-4" />
         </Button>
       </CardContent>
     </Card>

@@ -1,16 +1,16 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/_components/ui/input";
+import { Button } from "@/_components/ui/button";
 import { SearchIcon } from "lucide-react";
 
 export interface SearchInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> { }
 
 const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
   ({ className, ...props }, ref) => {
     return (
-      <div className="relative flex items-center">
+      <div className="relative flex items-center" >
         <Input
           type="search"
           className={cn("pr-10 pl-5", className)}

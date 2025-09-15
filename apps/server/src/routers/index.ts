@@ -3,6 +3,7 @@ import {
   router,
 } from "../lib/trpc";
 import { cartRouter } from "./cart";
+import { CategoryRouter } from "./category";
 import { productRouter } from "./product";
 import { ReviewRouter } from "./review";
 import { todoRouter } from "./todo";
@@ -22,6 +23,7 @@ export const appRouter = router({
   product: productRouter,
   wish: wishRouter,
   cart: cartRouter,
-  review: ReviewRouter
+  review: ReviewRouter,
+  category: CategoryRouter
 });
 export type AppRouter = typeof appRouter;

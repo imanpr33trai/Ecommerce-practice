@@ -8,11 +8,15 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
-  
-      
-      
-      "@generated/*": ["./prisma/generated/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@generated/*": [
+        "./prisma/generated/*"
+      ],
+      "prisma": [
+        "./prisma/"
+      ]
     },
     "outDir": "./dist",
     "types": [
@@ -22,5 +26,4 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx"
   },
-
 }

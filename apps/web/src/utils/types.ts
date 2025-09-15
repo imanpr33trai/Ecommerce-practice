@@ -5,7 +5,7 @@ import { type RouterOutputs } from './trpc'; // Your main tRPC types import
  *  FRONTEND TYPES (Inferred from tRPC RouterOutputs)
  * =================================================================================================
  *  SOURCE OF TRUTH: Your tRPC AppRouter.
- *  USAGE: Imported by React components, hooks, and pages.
+ *  USAGE: Imported by React _components, hooks, and pages.
  *  PURPOSE: To provide strictly-typed data shapes for the UI, ensuring it always
  *           matches the API's contract. This file follows a consistent naming convention.
  * =================================================================================================
@@ -21,16 +21,37 @@ export type ProductListItem = RouterOutputs['product']['getAll'][number];
 
 /**
  * Type for the detailed product object returned by the `product.getBySlug` endpoint.
- * This is the primary type for the dynamic product detail page.
+ * This is the primary type for the product detail page.
  */
-export type ProductDetailed = RouterOutputs['product']['getProductBySlug'];
+export type ProductDetailed = NonNullable<RouterOutputs['product']['getProductBySlug']>;
 
+/**
+ * Type for a single review object within a product's review list.
+ */
+export type ProductReview = RouterOutputs['review']['getReviewsByProductId'][number];
+
+/**
+ * Type for the data returned after successfully adding a new review.
+ */
+export type ReviewAddResult = RouterOutputs['review']['addReview'];
+
+
+/**
+ * Type for a single product object returned by the `product.getRelatedProducts` endpoint.
+ * Suitable for displaying in a "related products" section.
+ */
+export type RelatedProduct = RouterOutputs['product']['getRelatedProducts'][number]
+
+// You might also need specific types for the `useReview` hook's mutations:
+// export type ReviewUpdateResult = RouterOutputs['review']['updateReview'];
+// export type ReviewDeleteResult = RouterOutputs['review']['deleteReview'];
 /**
  * Type for a single product object returned by the `product.getByCategorySlug` endpoint.
  * This is the specific shape needed for category and search result grids.
  * Note the inclusion of the `_count` property for reviews.
  */
-export type ProductForCategoryGrid = RouterOutputs['product']['getByCategorySlug'][number];
+export type ProductForCategory = RouterOutputs['product']['getByCategorySlug'][number];
+export type ProductForCategoryGrid = RouterOutputs['product']['getByCategoryHierarchy'][number];
 
 export type PRoductFromHierarchy = RouterOutputs['product']['getByCategorySlug'][number]
 // ------------------------------ Category ------------------------------
@@ -93,6 +114,15 @@ export type WishlistAddItemResult = RouterOutputs['wish']['createWish'];
  */
 export type WishlistRemoveItemResult = RouterOutputs['wish']['removeWish'];
 
+/**
+ * Type for the output of the wishlist toggle mutation.
+ * Indicates whether an item was added or removed.
+ */
+export type WishlistToggleResult = RouterOutputs['wish']['toggle'];
+
+// 💡 Remove or update these types, as `add` and `remove` procedures no longer exist directly
+// export type WishlistAddItemResult = RouterOutputs['wishlist']['add'];
+// export type WishlistRemoveItemResult = RouterOutputs['wishlist']['remove'];
 
 // ------------------------------ Order ------------------------------
 
@@ -117,14 +147,18 @@ export type WishlistRemoveItemResult = RouterOutputs['wish']['removeWish'];
 /**
  * Type for the array of reviews for a product, returned by `product.getReviewsByProductId`.
  */
-export type ProductReviews = RouterOutputs['review']['productReview'];
+export type ProductReviews = RouterOutputs['review']['getReviewsByProductId'];
 
 /**
  * Type for a single review object within a product's review list.
  */
-export type ProductReview = RouterOutputs['review']['productReview'][number];
+
 
 /**
  * Type for the data returned after successfully adding a new review.
  */
-export type ReviewAddResult = RouterOutputs['review']['addReview'];
+
+
+export type TopLevelCategory = RouterOutputs['category']['getTopLevelCategories'][number]
+
+export type CategoryWithChildrenData = RouterOutputs['category']['getCategoryWithChildrenBySlug'];

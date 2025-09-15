@@ -1,4 +1,4 @@
-import { publicProcedure, router } from "@/lib/trpc";
+import { protectedProcedure, publicProcedure, router } from "@/lib/trpc";
 import { TRPCError } from "@trpc/server";
 import { type CartWithItems } from '@/lib/types'
 import prisma from "prisma";
@@ -46,8 +46,8 @@ export const cartRouter = router({
     //     }
     //     return cart
     // }),
-    getAll: publicProcedure.query(async ({ ctx }) => {
-        const userId = 'user_4';
+    getAll: protectedProcedure.query(async ({ ctx }) => {
+        const userId = ctx.session.user.id
 
         // --- TEMPORARY DIAGNOSTIC LOGS ---
         const cart = await prisma.cart.findFirst({

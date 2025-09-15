@@ -1,7 +1,7 @@
 "use client"
 
-import SignInForm from "@/components/sign-in-form";
-import SignUpForm from "@/components/sign-up-form";
+import SignInForm from "@/_components/sign-in-form";
+import SignUpForm from "@/_components/sign-up-form";
 import { useState } from "react";
 
 
