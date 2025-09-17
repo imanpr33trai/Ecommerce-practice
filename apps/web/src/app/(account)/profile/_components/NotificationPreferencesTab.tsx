@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { Save, Mail, Smartphone } from 'lucide-react';
-import { Button } from '@/_components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/_components/ui/card';
-import { Checkbox } from '@/_components/ui/checkbox';
-import { Label } from '@/_components/ui/label';
+import { Button } from '@comp/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@comp/card';
+import { Checkbox } from '@comp/checkbox';
+import { Label } from '@comp/label';
 
 export const NotificationPreferencesTab = () => {
     const [emailEnabled, setEmailEnabled] = useState(true);

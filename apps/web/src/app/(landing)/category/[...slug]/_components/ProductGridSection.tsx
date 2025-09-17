@@ -2,15 +2,15 @@
 
 import { useProduct } from '@/hooks/useProduct';
 import { ProductCard, ProductCardSkeleton } from '@/_components/client/ProductCard';
-import { type ProductForCategoryGrid } from '@/utils/types';
+import { type ProductForCategoryGrid } from '@/utils/typesClient';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/_components/ui/select';
-import { Button } from '@/_components/ui/button';
+} from '@comp/select';
+import { Button } from '@comp/button';
 import { useState } from 'react'; // For sorting state
 import { useCategory } from '@/hooks/useCategory';
 

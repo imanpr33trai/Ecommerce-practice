@@ -1,7 +1,7 @@
 'use client'; // 👈 Still a client component
 
 import MaxWidthWrapper from '@/_components/max-width-wrapper';
-import { Skeleton } from '@/_components/ui/skeleton';
+import { Skeleton } from '@comp/skeleton';
 import { useProduct } from '@/hooks/useProduct';
 import { ProductImageGallery } from './ProductImageGallery'; // Relative imports now correct
 import { ProductInfoBlock } from './ProductInfoBlock';

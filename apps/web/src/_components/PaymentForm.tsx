@@ -1,8 +1,8 @@
 
 import { CreditCard, Lock } from "lucide-react";
-import { Button } from "./ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import { Input } from "./ui/input";
+import { Button } from "@comp/button";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@comp/card";
+import { Input } from "@comp/input";
 import { IconBrandApple, IconBrandPaypal } from "@tabler/icons-react";
 
 export default function PaymentForm({ onNext }: { onNext: () => void }) {

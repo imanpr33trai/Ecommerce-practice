@@ -1,5 +1,5 @@
 import { publicProcedure, router } from "../lib/trpc";
-import type { CategoryWithChildren, SimpleCategory } from "@/lib/types";
+import type { CategoryWithChildren, SimpleCategory } from "db/types";
 import { TRPCError } from "@trpc/server";
 import prisma from "prisma";
 import z from "zod";

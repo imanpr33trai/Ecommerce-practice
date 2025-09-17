@@ -1,9 +1,9 @@
 "use client"
-import { Button } from "@/_components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/_components/ui/card";
-import { Input } from "@/_components/ui/input";
-import { Label } from "@/_components/ui/label";
-import { DialogTrigger, Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose, DialogFooter, DialogHeader, DialogOverlay, DialogPortal } from "@/_components/ui/dialog";
+import { Button } from "@comp/button";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@comp/card";
+import { Input } from "@comp/input";
+import { Label } from "@comp/label";
+import { DialogTrigger, Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose, DialogFooter, DialogHeader, DialogOverlay, DialogPortal } from "@comp/dialog";
 import { Lock, KeyRound, Trash2 } from "lucide-react";
 import { useState } from "react";
 

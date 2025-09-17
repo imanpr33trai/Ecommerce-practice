@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ArrowLeft, ArrowRight, Star } from 'lucide-react';
 import { Button } from '@/_componentsnts/ui/button';
 import { cn } from '@/lib/utils';
-import { type ProductDetailed } from '@/utils/types';
+import { type ProductDetailed } from '@/utils/typesClient';
 
 interface ProductImageGalleryProps {
     product: ProductDetailed;

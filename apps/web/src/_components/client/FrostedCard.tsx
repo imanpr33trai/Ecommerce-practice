@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "../ui/card";
+import { Card } from "@comp/card";
 import { cn } from "@/lib/utils";
 interface FrostedCardProps extends React.ComponentPropsWithoutRef<typeof Card> {
     children: React.ReactNode;

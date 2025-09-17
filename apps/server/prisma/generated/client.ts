@@ -122,6 +122,9 @@ export type Todo = Prisma.TodoModel
  */
 export type Wish = Prisma.WishModel
 
+export type UserRole = $Enums.UserRole
+export const UserRole = $Enums.UserRole
+
 export type OrderStatus = $Enums.OrderStatus
 export const OrderStatus = $Enums.OrderStatus
 

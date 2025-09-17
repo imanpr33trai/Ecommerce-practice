@@ -1,4 +1,4 @@
-import { Skeleton } from '@/_components/ui/skeleton';
+import { Skeleton } from '@comp/skeleton';
 import MaxWidthWrapper from '@/_components/max-width-wrapper';
 
 export default function CategoriesLoading() {

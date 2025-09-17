@@ -1,6 +1,6 @@
 import { Edit } from "lucide-react";
-import { Button } from "./ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "@comp/button";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@comp/card";
 
 export default function ReviewForm({ onBackToAdress, onBackToPayment }: { onBackToAdress: () => void, onBackToPayment: () => void }) {
     return (<>

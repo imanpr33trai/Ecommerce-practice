@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { CreditCard, Plus, Trash2 } from 'lucide-react';
-import { Button } from '@/_components/ui/button';
-import { CardContent, CardDescription, CardHeader, CardTitle, Card } from '@/_components/ui/card';
+import { Button } from '@comp/button';
+import { CardContent, CardDescription, CardHeader, CardTitle, Card } from '@comp/card';
 
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/_components/ui/dialog';
-import { Input } from '@/_components/ui/input';
-import { Label } from '@/_components/ui/label';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@comp/dialog';
+import { Input } from '@comp/input';
+import { Label } from '@comp/label';
 
 // Mock Payment Form Component (for Dialog)
 const PaymentMethodForm = ({ initialData }: { initialData?: any }) => {

@@ -3,7 +3,7 @@ import MaxWidthWrapper from "@/_components/max-width-wrapper";
 import { AccountNav } from "@/_components/SidebarProfile";
 import PersonalInfoTab from "./__components/PersonalInfoTab";
 import SecurityTab from "./__components/SecurityTab";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/_components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@comp/tabs";
 import { AddressesTab } from "./__components/AddressTab";
 import { PaymentMethodsTab } from "./__components/PaymentsTab";
 import { NotificationPreferencesTab } from "./__components/NotificationPreferencesTab";

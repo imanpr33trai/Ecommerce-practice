@@ -1,8 +1,8 @@
-import { Button } from "@/_components/ui/button";
-import { Card } from "@/_components/ui/card";
-import { Input } from "@/_components/ui/input";
+import { Button } from "@comp/button";
+import { Card } from "@comp/card";
+import { Input } from "@comp/input";
 import { AvatarImage } from "@radix-ui/react-avatar";
-import { Avatar } from "@/_components/ui/avatar";
+import { Avatar } from "@comp/avatar";
 
 const Sidebar = () => (
     <div className="col-span-12 lg:col-span-3 space-y-6">

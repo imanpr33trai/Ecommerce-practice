@@ -1,6 +1,6 @@
-import { Button } from "./ui/button"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./ui/card"
-import { Input } from "./ui/input"
+import { Button } from "@comp/button"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@comp/card"
+import { Input } from "@comp/input"
 
 const OrderSummary = ({ step }: { step: 'review' | 'address' | 'payment' }) => {
     return (

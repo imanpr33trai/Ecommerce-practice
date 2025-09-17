@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from '@/_components/ui/button';
-import { Checkbox } from '@/_components/ui/checkbox';
-import { Label } from '@/_components/ui/label';
+import { Button } from '@comp/button';
+import { Checkbox } from '@comp/checkbox';
+import { Label } from '@comp/label';
 import { useCategory } from '@/hooks/useCategory';
 import { useState } from 'react';
 

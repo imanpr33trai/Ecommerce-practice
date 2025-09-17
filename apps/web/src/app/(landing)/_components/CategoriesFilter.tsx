@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@/_components/ui/button";
+import { Button } from "@comp/button";
 import { useCategory } from "@/hooks/useCategory";
 import { useProduct } from "@/hooks/useProduct";
 import { SlidersHorizontal } from "lucide-react";

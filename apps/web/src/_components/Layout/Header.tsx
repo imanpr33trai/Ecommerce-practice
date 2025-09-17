@@ -2,7 +2,7 @@
 
 import { AppWindow, Heart, Search, ShoppingBag, UserCircle } from "lucide-react";
 import { SearchInput } from "@/_components/searchInput";
-import { Button } from "@/_components/ui/button";
+import { Button } from "@comp/button";
 
 
 export default function Header() {

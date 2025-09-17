@@ -2,7 +2,7 @@ import { protectedProcedure, publicProcedure, router } from "@/lib/trpc";
 import { TRPCError } from "@trpc/server";
 import prisma from "prisma";
 import z from "zod";
-import { } from "@/lib/types";
+
 
 
 export const wishRouter = router({
@@ -58,7 +58,7 @@ export const wishRouter = router({
     }),
     getAll: protectedProcedure.query(async ({ ctx }) => {
         const userId = ctx.session.user.id;
-        const wishList: WishListItem[] = await prisma.wish.findMany({
+        const wishList = await prisma.wish.findMany({
             where: { userId },
             include: {
                 product: {

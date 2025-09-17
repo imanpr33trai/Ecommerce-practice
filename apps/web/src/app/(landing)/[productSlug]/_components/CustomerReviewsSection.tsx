@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { MessageSquare, Star } from 'lucide-react';
-import { Button } from '@/_components/ui/button';
-import { CardContent, CardDescription, CardHeader, CardTitle } from '@/_components/ui/card';
-import { Textarea } from '@/_components/ui/textarea';
-import { Label } from '@/_components/ui/label';
+import { Button } from '@comp/button';
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@comp/card';
+import { Textarea } from '@comp/textarea';
+import { Label } from '@comp/label';
 import { FrostedCard } from '@/_components/client/FrostedCard';
-import { Avatar, AvatarFallback, AvatarImage } from '@/_components/ui/avatar';
-import { type ProductDetailed, type ProductReview } from '@/utils/types';
+import { Avatar, AvatarFallback, AvatarImage } from '@comp/avatar';
+import { type ProductDetailed, type ProductReview } from '@/utils/typesClient';
 import { useReview } from '@/hooks/useReview'; // Assuming you have a useReview hook
 
 import { cn } from '@/lib/utils';

@@ -1,6 +1,6 @@
-import { Button } from "@/_components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/_components/ui/card";
-import { Input } from "@/_components/ui/input";
+import { Button } from "@comp/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@comp/card";
+import { Input } from "@comp/input";
 
 
 

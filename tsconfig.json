@@ -7,10 +7,17 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",               // important
+    "rootDir": "../../",
+    "baseUrl": ".", // important
     "paths": {
-      "@generated/*": ["apps/server/prisma/generated/*"]
-    }    
+      "generated/*": [
+        "./apps/server/prisma/generated/*"
+      ]
+    }
   },
-  
+  "references": [
+    {
+      "path": "./packages/db-types"
+    }
+  ]
 }

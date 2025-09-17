@@ -1,10 +1,10 @@
 'use client';
 
 import { Grid } from 'lucide-react';
-import { CardContent, CardHeader, CardTitle } from '@/_components/ui/card';
+import { CardContent, CardHeader, CardTitle } from '@comp/card';
 import { FrostedCard } from '@/_components/client/FrostedCard';
 import { ProductCard, ProductCardSkeleton } from '@/_components/client/ProductCard';
-import { type ProductDetailed, type ProductForCategoryGrid } from '@/utils/types';
+import { type ProductDetailed, type ProductForCategoryGrid } from '@/utils/typesClient';
 import { api, trpc } from '@/utils/trpc';
 import { useQuery } from '@tanstack/react-query';
 import { useProduct } from '@/hooks/useProduct';

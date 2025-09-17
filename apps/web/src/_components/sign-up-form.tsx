@@ -3,9 +3,9 @@ import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import z from "zod";
 import Loader from "./loader";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { Button } from "@comp/button";
+import { Input } from "@comp/input";
+import { Label } from "@comp/label";
 import { useRouter } from "next/navigation";
 
 export default function SignUpForm({

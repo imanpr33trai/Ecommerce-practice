@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 
 "use client";
-import { Button } from "@/_components/ui/button";
+import { Button } from "@comp/button";
 import { useProduct } from "@/hooks/useProduct";
-import type { ProductDetailed, ReviewAddResult, ProductListItem, ProductReview } from "@/utils/types";
+import type { ProductDetailed, ReviewAddResult, ProductListItem, ProductReview } from "@/utils/typesClient";
 import {
   IconHeart,
   IconMessageCircle,
@@ -18,7 +18,7 @@ import Link from "next/link";
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Skeleton } from "@/_components/ui/skeleton";
+import { Skeleton } from "@comp/skeleton";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import Header from "@/_components/Layout/Header";
 

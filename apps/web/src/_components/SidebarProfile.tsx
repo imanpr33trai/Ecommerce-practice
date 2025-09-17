@@ -4,8 +4,8 @@ import {
     SidebarFooter,
     SidebarGroup,
     SidebarHeader,
-} from "@/_components/ui/sidebar"
-import { Card } from "./ui/card"
+} from "@comp/sidebar"
+import { Card } from "@comp/card"
 
 export function AccountNav() {
     return (

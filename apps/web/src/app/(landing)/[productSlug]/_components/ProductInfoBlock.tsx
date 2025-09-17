@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ShoppingCart, Heart, Minus, Plus, Star } from 'lucide-react';
-import { Button } from '@/_components/ui/button';
-import { Input } from '@/_components/ui/input';
-import { Label } from '@/_components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/_components/ui/radio-group'; // For variants
+import { Button } from '@comp/button';
+import { Input } from '@comp/input';
+import { Label } from '@comp/label';
+import { RadioGroup, RadioGroupItem } from '@comp/radio-group'; // For variants
 import { toast } from 'sonner';
-import { type ProductDetailed } from '@/utils/types';
+import { type ProductDetailed } from '@/utils/typesClient';
 import { useCart } from '@/hooks/useCart';
 import { useWish } from '@/hooks/useWish';
 import { cn } from '@/lib/utils'; // For class merging

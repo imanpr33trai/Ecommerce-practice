@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { MapPin, Plus, Pencil, Trash2 } from 'lucide-react';
-import { Button } from '@/_components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/_components/ui/card';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/_components/ui/dialog';
-import { Input } from '@/_components/ui/input';
-import { Label } from '@/_components/ui/label';
+import { Button } from '@comp/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@comp/card';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@comp/dialog';
+import { Input } from '@comp/input';
+import { Label } from '@comp/label';
 
 // Mock Address Form Component (for Dialog)
 const AddressForm = ({ initialData }: { initialData?: any }) => {

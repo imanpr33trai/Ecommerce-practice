@@ -1,0 +1,29 @@
+{
+    "extends": "@workspace/typescript-config/base.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "../../",
+        "baseUrl": ".",
+        "declaration": true,
+        "composite": true,
+        "declarationMap": true,
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "allowJs": true,
+        "emitDeclarationOnly": false,
+        "incremental": true,
+        "paths": {
+            "@generated/*": [
+                "../../apps/server/prisma/generated/*"
+            ],
+        }
+    },
+    "include": [
+        "src/**/*",
+        "../../apps/server/prisma/generated/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

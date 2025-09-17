@@ -1,6 +1,6 @@
 import { protectedProcedure, publicProcedure, router } from "@/lib/trpc";
 import { TRPCError } from "@trpc/server";
-import { type CartWithItems } from '@/lib/types'
+import { type CartWithItems } from 'db/types'
 import prisma from "prisma";
 
 import z from "zod";
@@ -92,7 +92,7 @@ export const cartRouter = router({
 
 
     })).mutation(async ({ ctx, input }) => {
-        const userId = ctx.session?.user.id || 'user_4';
+        const userId = ctx.session.user?.id || 'user_4';
         // if (!userId) {
         //     throw new TRPCError({
         //         code: 'UNAUTHORIZED',
@@ -124,7 +124,7 @@ export const cartRouter = router({
     removeFromCart: publicProcedure.input(z.object({
         productId: z.string()
     })).mutation(async ({ ctx, input }) => {
-        const userId = ctx.session?.user.id || 'user_4';
+        const userId = ctx.session?.user?.id || 'user_4';
         // if (!ctx.session?.user) {
         //     throw new TRPCError({
         //         code: "UNAUTHORIZED",
@@ -167,7 +167,7 @@ export const cartRouter = router({
         productId: z.string(),
         quantity: z.number().min(1)
     })).mutation(async ({ ctx, input }) => {
-        const userId = ctx.session?.user.id || 'user_4';
+        const userId = ctx.session?.user?.id || 'user_4';
         // if (!ctx.session?.user) {
         //     throw new TRPCError({
         //         code: "UNAUTHORIZED",

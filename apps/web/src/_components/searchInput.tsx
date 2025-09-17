@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Input } from "@/_components/ui/input";
-import { Button } from "@/_components/ui/button";
+import { Input } from "@comp/input";
+import { Button } from "@comp/button";
 import { SearchIcon } from "lucide-react";
 
 export interface SearchInputProps

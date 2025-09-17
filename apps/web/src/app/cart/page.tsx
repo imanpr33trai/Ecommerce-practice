@@ -6,11 +6,11 @@ import { useMemo } from 'react';
 import { ShoppingCart, Trash2, Plus, Minus } from 'lucide-react';
 
 // Import shadcn/ui and custom types/hooks
-import { Button } from '@/_components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/_components/ui/card';
-import { Separator } from '@/_components/ui/separator';
-import { Skeleton } from '@/_components/ui/skeleton';
-import { type UserCart, type CartItem } from '@/utils/types';
+import { Button } from '@comp/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@comp/card';
+import { Separator } from '@comp/separator';
+import { Skeleton } from '@comp/skeleton';
+import { type UserCart, type CartItem } from '@/utils/typesClient';
 import { useCart } from '@/hooks/useCart';
 
 

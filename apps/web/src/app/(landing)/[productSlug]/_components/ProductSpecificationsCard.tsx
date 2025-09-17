@@ -1,8 +1,8 @@
 'use client';
 
 import { FileText } from 'lucide-react';
-import { CardContent, CardHeader, CardTitle } from '@/_components/ui/card';
-import { Separator } from '@/_components/ui/separator';
+import { CardContent, CardHeader, CardTitle } from '@comp/card';
+import { Separator } from '@comp/separator';
 import { FrostedCard } from '@/_components/client/FrostedCard';
 
 interface ProductSpecificationsCardProps {

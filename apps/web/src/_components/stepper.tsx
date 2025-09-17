@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Check } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "@comp/button";
 
 type Step = 'address' | 'payment' | 'review';
 interface StepperProps {

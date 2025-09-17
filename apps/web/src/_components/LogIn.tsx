@@ -3,15 +3,15 @@
 import { useState } from 'react';
 import { Mail, Lock, LogIn, Chrome } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/_components/ui/button';
-import { Input } from '@/_components/ui/input';
+import { Button } from '@comp/button';
+import { Input } from '@comp/input';
 import { useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
 import { useForm } from '@tanstack/react-form';
 import { toast } from 'sonner';
 import z from 'zod';
 import Loader from './loader';
-import { Label } from './ui/label';
+import { Label } from '@comp/label';
 import MaxWidthWrapper from './max-width-wrapper';
 
 // In a real app, you would use the Next.js <Image /> component

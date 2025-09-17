@@ -1,7 +1,7 @@
 'use client';
 
 import { Truck } from 'lucide-react';
-import { CardContent, CardHeader, CardTitle } from '@/_components/ui/card';
+import { CardContent, CardHeader, CardTitle } from '@comp/card';
 import { FrostedCard } from '@/_components/client/FrostedCard';
 
 interface ProductShippingCardProps {

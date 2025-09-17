@@ -1,11 +1,11 @@
 "use client"
-import { Button } from "@/_components/ui/button";
-import { Card } from "@/_components/ui/card";
+import { Button } from "@comp/button";
+import { Card } from "@comp/card";
 import { useProduct } from "@/hooks/useProduct";
 import { useWish } from "@/hooks/useWish";
 import { Star, Heart, ShoppingBag, ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image"
-import type { CartAddItemResult } from '@/utils/types';
+import type { CartAddItemResult } from '@/utils/typesClient';
 
 const NewDealsCard = () => {
 

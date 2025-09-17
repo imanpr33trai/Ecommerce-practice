@@ -1,5 +1,5 @@
 import { protectedProcedure, publicProcedure, router } from "@/lib/trpc";
-import type { ReviewWithUser } from "@/lib/types";
+import type { ReviewWithUser } from "db/types";
 import { TRPCError } from "@trpc/server";
 import prisma from "prisma";
 import z from "zod";

@@ -4,10 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCart, Heart, Sparkles } from 'lucide-react';
 
-import { Card, CardContent } from '@/_components/ui/card';
-import { Button } from '@/_components/ui/button';
-import { Skeleton } from '@/_components/ui/skeleton';
-import { type ProductForCategoryGrid } from '@/utils/types';
+import { Card, CardContent } from '@comp/card';
+import { Button } from '@comp/button';
+import { Skeleton } from '@comp/skeleton';
+import { type ProductForCategoryGrid } from '@/utils/typesClient';
 import { useCart } from '@/hooks/useCart';
 import { useWish } from '@/hooks/useWish';
 

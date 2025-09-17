@@ -1,6 +1,6 @@
 import MaxWidthWrapper from "@/_components/max-width-wrapper";
-import { Button } from "@/_components/ui/button";
-import { Card } from "@/_components/ui/card";
+import { Button } from "@comp/button";
+import { Card } from "@comp/card";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 const FinalCTASection = () => {

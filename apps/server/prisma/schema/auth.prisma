@@ -4,6 +4,7 @@ model User {
   email         String
   emailVerified Boolean
   image         String?
+  role          UserRole  @default(USER)
   createdAt     DateTime
   updatedAt     DateTime
   sessions      Session[]

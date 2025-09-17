@@ -6,12 +6,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // Import shadcn/ui and custom types/hooks
-import { Button } from '@/_components/ui/button';
-import { Card, CardContent } from '@/_components/ui/card';
-import { Skeleton } from '@/_components/ui/skeleton';
+import { Button } from '@comp/button';
+import { Card, CardContent } from '@comp/card';
+import { Skeleton } from '@comp/skeleton';
 import { useCart } from '@/hooks/useCart';
 import { useWish } from '@/hooks/useWish';
-import { type WishlistItem } from '@/utils/types';
+import { type WishlistItem } from '@/utils/typesClient';
 import { toast } from 'sonner';
 import { IconHeartFilled } from '@tabler/icons-react';
 

@@ -1,6 +1,6 @@
 "use client"
-import { Button } from "@/_components/ui/button";
-import { Card } from "@/_components/ui/card";
+import { Button } from "@comp/button";
+import { Card } from "@comp/card";
 import { useProduct } from "@/hooks/useProduct";
 import { Expand, Heart } from "lucide-react";
 import Image from "next/image"
